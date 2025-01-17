@@ -1,4 +1,4 @@
-package ac.uryukyu.ie.e245756_e245759;
+package jp.ac.uryukyu.ie.e245756_e245759;
 
 import java.util.ArrayList;
 import java.util.List;
