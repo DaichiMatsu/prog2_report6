@@ -11,7 +11,6 @@ public class ReplaceCards {
 
 
 
-
        for (int i = 0; i < sotedCards.size(); i ++){ //リストの要素数以下の時iに+1をしていく
            System.out.println(i+1 + "枚目:" + sotedCards.get(i));
            System.out.println("入れ替えますか？(1:はい/2:いいえ)");
