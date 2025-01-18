@@ -4,7 +4,6 @@ package jp.ac.uryukyu.ie.e245756_e245759;
 import java.util.Scanner;
 import java.util.List;
 
-
 public class ReplaceCards {
   //カードを入れ替えるメソッド
    public void replaceCards(HandOutCards cards, List<Integer> sotedCards){
