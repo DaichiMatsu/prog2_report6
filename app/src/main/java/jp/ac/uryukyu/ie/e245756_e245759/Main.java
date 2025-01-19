@@ -2,78 +2,59 @@ package jp.ac.uryukyu.ie.e245756_e245759;
 import java.util.List;
 import java.util.Scanner;
 public class Main {
-   public static void main(String[] args) {
-       int playerMoney = 1000;  // 初期金額（最初の所持金）
-       int goalMoney = 5000;  // ゲームのクリア条件（目標金額）
-       //ゲームスタート　目標金額より所持金が少ない間動き続ける
-       while (playerMoney < goalMoney) {
-           if(playerMoney >0){
-               System.out.println("現在の所持金: " + playerMoney + " 円");
-               Scanner scanner = new Scanner(System.in);  // Scannerを使って掛け金を入力させる
-               // ゲーム開始時の掛け金入力   
-               int bet = -1;
-               while (bet <= 0 || bet > playerMoney) {
-                   System.out.print("掛け金を入力してください: ");
-                   bet = scanner.nextInt(); // ユーザーから掛け金を入力してもらう
-                   // 所持金以上の掛け金は許可しない
-                   if (bet <= 0) {
-                       System.out.println("掛け金は正の数で入力してください。");
-                   } else if (bet > playerMoney) {
-                       System.out.println("掛け金は所持金 " + playerMoney + " 円以下にしてください。");
-                   }
-               }
-               playerMoney -= bet;
-               HandOutCards cards = new HandOutCards();  // HandOutCardsクラスのインスタンスを生成
-               List<Integer> hand = cards.getRandomCards(5);  // 山札から5枚引く
-               CheckCards checkCards = new CheckCards();  // CheckCards クラスのインスタンスを作成
-               List<Integer> sortedCards = checkCards.sortCards(hand);  // checkCards メソッドで手札を並び替える
-               System.out.println("手札: " + sortedCards);               
-               ReplaceCards replaceCards = new ReplaceCards();  //カード入れ替えのメソッドをReplaceCardsから呼び出す
-               replaceCards.replaceCards(cards, sortedCards);
-               System.out.println("入れ替え後の手札: " + cards);   //checkCards メソッドで手札を入れ替える
-               List<Integer> sortedCards2 = checkCards.sortCards(sortedCards);  // checkCards メソッドで手札を並び替える
-               System.out.println("手札: " + sortedCards2);
-               String result = checkCards.checkCards(sortedCards);  // 役を判定
-               System.out.println("役: " + result); 
-               Calculation calc = new Calculation();  // Calculation クラスのインスタンスを作成
-               int magnification = calc.getReward(result);  // 役に応じた倍率を取得
-               // 役に応じて所持金を更新
-               if(result.equals("役なし")){
-               }else{
-                    System.out.println("ダブルアップチャレンジに挑戦しますか？(はい/いいえ)");
-                    String input = scanner.nextLine();
-                    if (input.equals("はい")){
-                        System.out.println("新たに山札を配ります");
-                        //手札を引くメソッドをHand_0ut_Cardsクラス呼び出す
-                        HandOutCards handoutcards = new HandOutCards();
-                        int Draw = 5; //手札を引く回数
-                        List<Integer> secoundcards = handoutcards.getRandomCards(Draw); //cardsは手札を入れるためのリスト
-                        System.out.println("手札:" + "[" + secoundcards.get(0) + " ,1枚目 ,2枚目 ,3枚目 ,4枚目]");
-                        DoubleUp doubleUp = new DoubleUp();
-                        int cardnumber = doubleUp.chooseCard(secoundcards);
-                        if (secoundcards.get(0) < secoundcards.get(cardnumber)){
-                            bet = bet * 2;
-                        } else{
-                            bet = bet * 0;
-                        }
-                        playerMoney += bet * magnification;
-                }else{
-
+    public static void main(String[] args) {
+        int playerMoney = 1000;  // 初期金額（最初の所持金）
+        int goalMoney = 5000;  // ゲームのクリア条件（目標金額）
+        //ゲームスタート　目標金額より所持金が少ない間動き続ける
+        while (playerMoney < goalMoney) {
+            if(playerMoney >0){
+                System.out.println("現在の所持金: " + playerMoney + " 円");
+                Scanner scanner = new Scanner(System.in);  // Scannerを使って掛け金を入力させる
+                // ゲーム開始時の掛け金入力   
+                int bet = -1;
+                while (bet <= 0 || bet > playerMoney) {
+                    System.out.print("掛け金を入力してください: ");
+                    bet = scanner.nextInt(); // ユーザーから掛け金を入力してもらう
+                    // 所持金以上の掛け金は許可しない
+                    if (bet <= 0) {
+                        System.out.println("掛け金は正の数で入力してください。");
+                    } else if (bet > playerMoney) {
+                        System.out.println("掛け金は所持金 " + playerMoney + " 円以下にしてください。");
+                    }
                 }
-                    
-                    
-               }
-               System.out.println("掛け金: " + bet + " 円 X " + magnification + " 倍");
-           }else{
-               break;
-           }
-       }
-       if(playerMoney >= goalMoney){
-           System.out.println("所持金: " + playerMoney);
-           System.out.println("ゲームクリア！！");
-       }else{
-           System.out.println("所持金: " + playerMoney);
-           System.out.println("ゲームオーバー");
-       }
-   }   
+                playerMoney -= bet;
+                HandOutCards cards = new HandOutCards();  // HandOutCardsクラスのインスタンスを生成
+                List<Integer> hand = cards.getRandomCards(5);  // 山札から5枚引く
+                CheckCards checkCards = new CheckCards();  // CheckCards クラスのインスタンスを作成
+                List<Integer> sortedCards = checkCards.sortCards(hand);  // checkCards メソッドで手札を並び替える
+                System.out.println("手札: " + sortedCards);               
+                ReplaceCards replaceCards = new ReplaceCards();  //カード入れ替えのメソッドをReplaceCardsから呼び出す
+                replaceCards.replaceCards(cards, sortedCards);
+                List<Integer> sortedCards2 = checkCards.sortCards(sortedCards);  // checkCards メソッドで手札を並び替える
+                System.out.println("手札: " + sortedCards2);
+                String result = checkCards.checkCards(sortedCards2);  // 役を判定
+                System.out.println("役: " + result); 
+                Calculation calc = new Calculation();  // Calculation クラスのインスタンスを作成
+                int magnification = calc.getReward(result);  // 役に応じた倍率を取得
+                // 役に応じて所持金を更新
+                if(result.equals("役なし")){
+                 System.out.println("掛け金: " + bet + " 円 X " + magnification + " 倍");
+                }else{
+                 DoubleUp doubleUp = new DoubleUp();//doubleUpクラスのインスタンスを作成
+                    magnification = doubleUp.doubleUp(magnification);
+                    playerMoney += bet * magnification;//報酬を所持金に追加する
+                    System.out.println("掛け金: " + bet + " 円 X " + magnification + " 倍");
+                }
+            }else{
+                break;
+            }
+        }
+        if(playerMoney >= goalMoney){
+            System.out.println("所持金: " + playerMoney);
+            System.out.println("ゲームクリア！！");
+        }else{
+            System.out.println("所持金: " + playerMoney);
+            System.out.println("ゲームオーバー");
+        }
+    }
 }

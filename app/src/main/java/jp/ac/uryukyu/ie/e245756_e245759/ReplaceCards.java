@@ -20,14 +20,14 @@ public class ReplaceCards {
            if (input.equals("1")){ //"equals"はString型における"=="
                List<Integer> newCard = cards.getRandomCards(1); //newCardは新しく引くカードを入れておくリスト(指定枚数はn=1)
 
-
+               System.out.println("交換します");
                sotedCards.set(i, newCard.get(0)); //setメソッドで手札を更新する　set(置き換える場所, 置き換えたい値)
            } else{
                System.out.println("交換しませんでした");
            }
        }
 
-       scanner.close();
+       
    }
 }
 
