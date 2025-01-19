@@ -1,6 +1,5 @@
 package jp.ac.uryukyu.ie.e245756_e245759;
 import java.util.List;
-import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         int playerMoney = 1000;  // 初期金額（最初の所持金）
@@ -9,20 +8,9 @@ public class Main {
         while (playerMoney < goalMoney) {
             if(playerMoney >0){
                 System.out.println("現在の所持金: " + playerMoney + " 円");
-                Scanner scanner = new Scanner(System.in);  // Scannerを使って掛け金を入力させる
-                // ゲーム開始時の掛け金入力   
-                int bet = -1;
-                while (bet <= 0 || bet > playerMoney) {
-                    System.out.print("掛け金を入力してください: ");
-                    bet = scanner.nextInt(); // ユーザーから掛け金を入力してもらう
-                    // 所持金以上の掛け金は許可しない
-                    if (bet <= 0) {
-                        System.out.println("掛け金は正の数で入力してください。");
-                    } else if (bet > playerMoney) {
-                        System.out.println("掛け金は所持金 " + playerMoney + " 円以下にしてください。");
-                    }
-                }
-                playerMoney -= bet;
+                BetMoney betMoney = new BetMoney(); // BetManager のインスタンスを生成
+                int bet = betMoney.getBet(playerMoney); // BetManager を使って掛け金を入力
+                playerMoney -= bet; //所持金から掛け金を引く
                 HandOutCards cards = new HandOutCards();  // HandOutCardsクラスのインスタンスを生成
                 List<Integer> hand = cards.getRandomCards(5);  // 山札から5枚引く
                 CheckCards checkCards = new CheckCards();  // CheckCards クラスのインスタンスを作成
