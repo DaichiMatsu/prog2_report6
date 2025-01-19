@@ -40,7 +40,28 @@ public class Main {
                // 役に応じて所持金を更新
                if(result.equals("役なし")){
                }else{
-                   playerMoney += bet * magnification;
+                    System.out.println("ダブルアップチャレンジに挑戦しますか？(はい/いいえ)");
+                    String input = scanner.nextLine();
+                    if (input.equals("はい")){
+                        System.out.println("新たに山札を配ります");
+                        //手札を引くメソッドをHand_0ut_Cardsクラス呼び出す
+                        HandOutCards handoutcards = new HandOutCards();
+                        int Draw = 5; //手札を引く回数
+                        List<Integer> secoundcards = handoutcards.getRandomCards(Draw); //cardsは手札を入れるためのリスト
+                        System.out.println("手札:" + "[" + secoundcards.get(0) + " ,1枚目 ,2枚目 ,3枚目 ,4枚目]");
+                        DoubleUp doubleUp = new DoubleUp();
+                        int cardnumber = doubleUp.chooseCard(secoundcards);
+                        if (secoundcards.get(0) < secoundcards.get(cardnumber)){
+                            bet = bet * 2;
+                        } else{
+                            bet = bet * 0;
+                        }
+                        playerMoney += bet * magnification;
+                }else{
+
+                }
+                    
+                    
                }
                System.out.println("掛け金: " + bet + " 円 X " + magnification + " 倍");
            }else{
@@ -54,5 +75,5 @@ public class Main {
            System.out.println("所持金: " + playerMoney);
            System.out.println("ゲームオーバー");
        }
-   }
+   }   
 }
